@@ -1,0 +1,15 @@
+console.log(req.query);
+  cartModel.query(
+    "SELECT cart.id,cart.user_id, cart.product_id, cart.amount, cart.price, products.name FROM `cart` JOIN products ON products.id = cart.product_id WHERE user_id=?",
+    [req.query.id],
+    (err, rows) => {
+      if (!err) {
+        res.json({
+          cart: rows,
+        });
+        console.log(rows);
+      } else {
+        console.log(err);
+      }
+    }
+  );
